@@ -21,11 +21,73 @@ export default class DB {
     }
   }
 
-  //   static resetDB() {
-  //     try {
+  static resetDB() {
+    try {
+      fs.writeFileSync(filename, "[]", "utf-8");
+      console.log("DB file reset to empty.");
+      return true;
+    } catch (e) {
+      throw new Error("Cant not write in " + filename);
+    }
+  }
 
-  //     } catch (e) {
-  //       console.error("Error", e);
-  //     }
-  //   }
+  static DBExists() {
+    if (fs.existsSync(filename)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  static getTaskById(id) {
+    let data;
+    if (DB.DBExists()) {
+      data = fs.readFileSync(filename, "utf-8");
+    } else {
+      DB.createDB();
+      return false;
+    }
+
+    try {
+      data = JSON.parse(data);
+      const task = data.find((t) => t.id === Number(id));
+      return task ? task : false;
+    } catch (e) {
+      throw new Error("Syntax error.\nPlease check the DB file.");
+    }
+  }
+
+  static getTaskByTitle(title) {
+    let data;
+    if (DB.DBExists()) {
+      data = fs.readFileSync(filename, "utf-8");
+    } else {
+      DB.createDB();
+      return false;
+    }
+    try {
+      data = JSON.parse(data);
+      const task = data.find((t) => t.title === title);
+      return task ? task : false;
+    } catch (e) {
+      throw new Error("Syntax error.\nPlease check the DB file.");
+    }
+  }
+
+  static getAllTasks() {
+    let data;
+    if (DB.DBExists()) {
+      data = fs.readFileSync(filename, "utf-8");
+    } else {
+      DB.createDB();
+      return [];
+    }
+
+    try {
+      data = JSON.parse(data);
+      return data;
+    } catch (e) {
+      throw new Error("Syntax error.\nPlease check the DB file.");
+    }
+  }
 }
