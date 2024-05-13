@@ -1,23 +1,7 @@
 [
     {
         "id": 1,
-        "title": "Learn Node.js",
-        "Completed": false
-    },
-    {
-        "id": 2,
-        "title": "Learn JavaScript",
-        "Completed": true
-    },
-    {
-        "id": 3,
-        "title": "Learn JavaScript2",
-        "Completed": true,
-        "completed": true
-    },
-    {
-        "id": 4,
-        "title": "Learn JavaScrispt2",
+        "title": "Learn Java",
         "completed": true
     }
 ]

@@ -167,7 +167,24 @@ export default class DB {
     }
   }
 
+  static insertBulkData(data) {
+    if (typeof data === "string") {
+      try {
+        data = JSON.parse(data);
+      } catch (e) {
+        throw new Error("Invalid data.");
+      }
+    }
+    if (data instanceof Array) {
+      data = JSON.stringify(data, null, "    ");
+    } else {
+      throw new Error("Invalid data.");
+    }
 
-
-
+    try {
+      fs.writeFileSync(filename, data);
+    } catch (e) {
+      throw new Error("Can not write to DB file.");
+    }
+  }
 }
