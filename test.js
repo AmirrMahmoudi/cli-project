@@ -1,20 +1,13 @@
 console.clear();
 import "dotenv/config";
-import DB from "./db.js";
+import Task from "./task.js";
 
-const data1 = [
-  {
-    id: 1,
-    title: "Learn C#",
-    completed: true,
-  },
-  {
-    id: 2,
-    title: "Learn MATLAB",
-    completed: false,
-  },
-];
-const data2 = '[{"id":1,"title":"Learn Java","completed":true}]';
-DB.insertBulkData(data1);
+const t1 =  Task.getTaskById(2);
+console.log(t1);
 
-DB.deleteTask(1);
+// t1.title = "Learn HTMdsL";
+// t1.completed = true;
+// t1.save();
+// t1.completed = false;
+// t1.save();
+// console.log(t1);
