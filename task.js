@@ -56,7 +56,7 @@ export default class Task {
     const task = DB.getTaskById(id);
     if (task) {
       const item = new Task(task.title, task.completed);
-      item.#id = id;
+      item.#id = task.id;
       return item;
     } else {
       return false;
@@ -74,8 +74,12 @@ export default class Task {
     }
   }
 
-  static getAllTasks() {
+  static getAllTasks(raqObject = false) {
     const tasks = DB.getAllTasks();
+
+    if (raqObject) {
+      return tasks;
+    }
     const items = [];
     for (let task of tasks) {
       const item = new Task(task.title, task.completed);

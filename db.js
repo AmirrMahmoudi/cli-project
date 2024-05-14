@@ -24,7 +24,6 @@ export default class DB {
   static resetDB() {
     try {
       fs.writeFileSync(filename, "[]", "utf-8");
-      console.log("DB file reset to empty.");
       return true;
     } catch (e) {
       throw new Error("Cant not write in " + filename);
